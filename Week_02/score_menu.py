@@ -18,12 +18,14 @@ MENU = "(G)- Get a valid score \n(P)- Print result\n (S)- Show stars\n(Q)- Quit"
 
 def main():
     """Determine score status"""
-    score = float(input("Enter score: "))
     print(MENU)
+    score = float(input("Enter score: "))
+    valid_score(score)
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "G":
-            score = float(input("Enter score: "))
+            # score = float(input("Enter score: "))
+            print("You have validated your score")
         elif choice == "P":
             print(score_result(score))
         elif choice == "S":
@@ -35,24 +37,27 @@ def main():
     print("Thank you.")
 
 
-def score_result(score):
-    """Calculate score result"""
+def valid_score(score):
     if score < 0 or score > 100:
-        return "Invalid score"
+        print("Invalid score.Please enter a valid score")
     else:
-        if score >= 90:
-            return "Excellent"
-        elif score >= 50:
-            return "Passable"
-        else:
-            return "Bad"
+        return score
+
+
+def score_result(score):
+    """ Calculate score result"""
+    if score >= 90:
+        print("Excellent")
+    elif 50 <= score <= 89:
+        print("Passable")
+    else:
+        print("Bad")
 
 
 def stars(score):
     """Calculate stars"""
-    for i in range(score):
-        print("*", end="")
-    print()
+    number_stars = int(score / 10)
+    return "*" * number_stars
 
 
 main()
